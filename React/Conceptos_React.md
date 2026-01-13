@@ -48,6 +48,7 @@ setName(value);
 ```
 
 # Useffect
+Se usa para que cuando cambie un estado y queramos ejecutar una funcion 
 
 # LocalStorage
 

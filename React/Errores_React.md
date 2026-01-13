@@ -70,3 +70,10 @@ Codigo correcto
 ```js
 onClick={() => onLogin(nameState, passwd)}
 ```
+
+# No se volvia a cargar la pagina 
+Error:
+Usaba una variable normal 
+
+Solucion:
+necesitaba usar un useEstate
