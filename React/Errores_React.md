@@ -71,9 +71,93 @@ Codigo correcto
 onClick={() => onLogin(nameState, passwd)}
 ```
 
-# No se volvia a cargar la pagina 
+# No se volvia a cargar la pagina
+
 Error:
-Usaba una variable normal 
+Usaba una variable normal
 
 Solucion:
 necesitaba usar un useEstate
+
+# No detectaba a cual habia cambiado
+
+Codigo malo:
+
+```js
+function SelectorPromocion({ ciclos_formativos, setFpEstado } = props) {
+  function changeState(event) {
+    console.log(event.target);
+  }
+  return (
+    <select name="" id="" onChange={changeState}>
+      <option value="">Seleccione un Ciclo Formativo</option>
+      {ciclos_formativos.map((ciclo) => (
+        <option name={ciclo} id={ciclo} value={ciclo}>
+          {ciclo}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+export default SelectorPromocion;
+```
+
+Problema en el console log el nombre no mostraba nada
+
+Solucion:
+
+Debido a que no tenia puesto el **value** en el campo **option**, no sabia a cual habia cambiado
+
+```js
+<select onChange={changeState}>
+  <option value="">Seleccione un Ciclo Formativo</option>
+  {ciclos_formativos.map((ciclo) => (
+    <option value={ciclo}>{ciclo}</option>
+  ))}
+</select>
+```
+
+# Uncaught TypeError: Assignment to constant variable.
+
+Codigo error:
+
+```js
+students_state = students_state.filter(
+  (student) => student.ciclo === fp_estado
+);
+```
+
+El problema es que estamos intentando asignar un nuevo valor a una constante
+
+# Uncaught Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
+
+Codigo error:
+
+```js
+if (fp_estado != "") {
+  const filter_fp = students_state.filter(
+    (student) => student.ciclo === fp_estado
+  );
+  setStudentsState(filter_fp);
+}
+```
+
+El problema es que cada vez que se renderiza la web entra en el if y dentro del if esta el setStudent lo cual proboca otro disparador(el cual rederinza la pagina de nuevo y vuelve a entrar en el if) y se produce un loop / bucle infinito.
+
+Para ello deberemos usar el UseEfect
+
+Solucion:
+El problema que tenia yo es que el setStudent hace rederizar de nuevo y eso entra en un loop pero con el useEffect si no se cambio no va a volver a entra
+
+# No filtraba correctamente
+
+El problema era que solo podria filtrar por el nombre y debia ser tal cual el nombre, la solucion era añadir tanto **lowerCase** en el array como el input del usuario, esto nos sirve para que ambos tengan **el mismo formato**
+
+## No podria filtrar por palabrar en el medio / contenia esa letra
+
+No podia / saber como filtrar por si contenia esa letra o no al final la solucion era el filtre junto un **includes**
+
+```js
+alumno.apellidos.toLowerCase().includes(search_user_estate.toLowerCase());
+```
