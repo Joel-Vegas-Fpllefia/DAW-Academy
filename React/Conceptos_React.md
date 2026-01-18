@@ -102,6 +102,25 @@ Se usa para que cuando cambie un estado y queramos ejecutar una funcion
 
 # LocalStorage
 
+## Añadir campo
+
+```js
+localStorage.setItem("usuario", nombre);
+```
+
+## Recoger valor
+
+```js
+localStorage.getItem("usuario");
+```
+
+## Comprobar valor
+
+```js
+const nombre = localStorage.getItem("usuario");
+console.log(nombre);
+```
+
 # Hook
 
 # Recoger datos de un formulario
@@ -124,4 +143,30 @@ localStorage.setItem("username", nameState);
 
 ```js
 const nombre = localStorage.getItem("username");
+```
+
+# PROPS
+
+Son funciones las cuales se declare en el componente padre y se envia como parametro al componente hijo.
+
+```js
+// Componente hijo
+function Hijo({ onClick }) {
+  return <button onClick={onClick}>Clic aquí</button>;
+}
+
+// Componente padre
+function Padre() {
+  const saludar = () => alert("Hola desde el padre!");
+
+  return <Hijo onClick={saludar} />; // pasa la función al hijo
+}
+```
+
+# Cuando haga click en un boton enviar a un componente
+
+# Añadir un nuevo Usuario al LocalStorage
+
+```js
+setStudentsState([...students_state, nuevoAlumno]);
 ```

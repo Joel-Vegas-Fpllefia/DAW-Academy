@@ -124,7 +124,7 @@ Codigo error:
 
 ```js
 students_state = students_state.filter(
-  (student) => student.ciclo === fp_estado
+  (student) => student.ciclo === fp_estado,
 );
 ```
 
@@ -137,7 +137,7 @@ Codigo error:
 ```js
 if (fp_estado != "") {
   const filter_fp = students_state.filter(
-    (student) => student.ciclo === fp_estado
+    (student) => student.ciclo === fp_estado,
   );
   setStudentsState(filter_fp);
 }
@@ -161,3 +161,77 @@ No podia / saber como filtrar por si contenia esa letra o no al final la solucio
 ```js
 alumno.apellidos.toLowerCase().includes(search_user_estate.toLowerCase());
 ```
+
+# No filtra por ambos campos:
+
+El problema venia debido a que intentaba reutilizar el state como si fuera una variable, lo que pretendia era primero filtrarlo por nombre y pensaba que se quedaba guardado con ese filtro y luego queria volver a usarla ya filtrada para filtrar el curso.
+
+PROBLEMA:
+**El useState solo guarda la ultima llamada entonces cuando filtrabamos por curso no teniamos almacenado al usuario**
+
+# Llama a la funcion si darle al boton de enviar
+
+Tengo puesto en el boton enviar el evento onClick para cuando clique envie los datos pero se llama igual sin darle al btn, aparte al enviar datos y no poner previamente () => lo que hacia era llamar de forma directa a la funcion
+
+```js
+<>
+  <input
+    type="text"
+    placeholder="Introduce Usuario"
+    required
+    value={name_logging}
+    onChange={updateName}
+  />
+  <input
+    type="password"
+    name=""
+    id=""
+    value={password_logging}
+    onChange={updatePasswd}
+    required
+  />
+  <button onClick={() => onLogin(name_logging, password_logging)}>
+    Iniciar Session
+  </button>
+</>
+```
+
+El problema era que como no teniamos preventDefault no para de enviarse de forma automatica ya que se renderizaba cada vez que escribiamos una letra
+
+Solucion:
+
+```js
+<>
+  <input
+    type="text"
+    placeholder="Introduce Usuario"
+    required
+    value={name_logging}
+    onChange={updateName}
+  />
+  <input
+    type="password"
+    name=""
+    id=""
+    value={password_logging}
+    onChange={updatePasswd}
+    required
+  />
+  <button onClick={callFunction}>Iniciar Session</button>
+</>
+```
+
+# Error en el if dentro de map
+
+```js
+admin_users.map((user_admin) =>
+       if(name_user === user_admin.nombre && passwd_user === user_admin.password){
+         console.log("HOLA")
+       })
+```
+
+No podemos usar un if sin envolverlo en {}
+
+# Cuando refresca una vez estando los datos filtrados se eliminan
+
+#
