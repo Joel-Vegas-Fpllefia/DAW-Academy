@@ -124,7 +124,7 @@ Codigo error:
 
 ```js
 students_state = students_state.filter(
-  (student) => student.ciclo === fp_estado,
+  (student) => student.ciclo === fp_estado
 );
 ```
 
@@ -137,7 +137,7 @@ Codigo error:
 ```js
 if (fp_estado != "") {
   const filter_fp = students_state.filter(
-    (student) => student.ciclo === fp_estado,
+    (student) => student.ciclo === fp_estado
   );
   setStudentsState(filter_fp);
 }
@@ -234,4 +234,301 @@ No podemos usar un if sin envolverlo en {}
 
 # Cuando refresca una vez estando los datos filtrados se eliminan
 
-#
+# El array esta vacion cuando lo envio al componente
+
+Estoy almacenando los datos en una lista y cuando los envio al componente esta vacio
+Codigo erroneo:
+
+```js
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+
+import Pokemon from "./components/pokemon";
+
+function App() {
+  const [visibility_poke, SetVisibility] = useState(false);
+  // Actividad 2.1
+  // const [list_poke, SetListPoke] = useState([]);
+  let pokemon_list = [];
+  function callback_hell() {
+    const start = Date.now();
+    SetVisibility(true);
+    fetch("https://pokeapi.co/api/v2/pokemon/1")
+      .then((r) => r.json())
+      .then((p1) => {
+        pokemon_list.push(p1);
+        console.log("1: ", p1.name);
+        fetch("https://pokeapi.co/api/v2/pokemon/2")
+          .then((r) => r.json())
+          .then((p2) => {
+            pokemon_list.push(p2);
+            console.log("2: ", p2.name);
+          });
+      });
+  }
+
+  return (
+    <>
+      <div>
+        <div onClick={callback_hell}>
+          <p>Exercici 2.1</p>
+          <p>Tiempo: </p>
+        </div>
+        <div>
+          <p>Exercici 2.2</p>
+          <p>Tiempo: </p>
+        </div>
+        <div>
+          <p>Exercici 2.3</p>
+          <p>Tiempo: </p>
+        </div>
+      </div>
+
+      <div className="card">
+        {visibility_poke && <Pokemon list_pokemon={pokemon_list}></Pokemon>}
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  );
+}
+
+export default App;
+```
+
+El problema es que la variable se envia vacia ya que cuando estoy rederizando el Componente Pokemon se estan llamando las API y aun no le ha dado tiempo a guardar los datos y ya se ha enviado los datos.
+Solucion:
+Usar un useState y un useEffect para renderizar por primera vez vacio
+
+# Uncaught ReferenceError: callback_hell is not defined
+
+```js
+useEffect(
+  // Funcion para act 1
+  function callback_hell() {
+    let pokemon_list = [];
+    const start = Date.now();
+    SetVisibility(true);
+    fetch("https://pokeapi.co/api/v2/pokemon/1")
+      .then((r) => r.json())
+      .then((p1) => {
+        pokemon_list.push(p1);
+        console.log("1: ", p1.name);
+        fetch("https://pokeapi.co/api/v2/pokemon/2")
+          .then((r) => r.json())
+          .then((p2) => {
+            pokemon_list.push(p2);
+            console.log("2: ", p2.name);
+            fetch("https://pokeapi.co/api/v2/pokemon/3")
+              .then((r) => r.json())
+              .then((p3) => {
+                pokemon_list.push(p3);
+                console.log("3: ", p3.name);
+                fetch("https://pokeapi.co/api/v2/pokemon/4")
+                  .then((r) => r.json())
+                  .then((p4) => {
+                    pokemon_list.push(p4);
+                    console.log("4: ", p4.name);
+                    fetch("https://pokeapi.co/api/v2/pokemon/5")
+                      .then((r) => r.json())
+                      .then((p5) => {
+                        pokemon_list.push(p5);
+                        console.log("5: ", p5.name);
+                        fetch("https://pokeapi.co/api/v2/pokemon/6")
+                          .then((r) => r.json())
+                          .then((p6) => {
+                            pokemon_list.push(p6);
+                            console.log("6: ", p6.name);
+                            fetch("https://pokeapi.co/api/v2/pokemon/7")
+                              .then((r) => r.json())
+                              .then((p7) => {
+                                pokemon_list.push(p7);
+                                console.log("7: ", p7.name);
+                                fetch("https://pokeapi.co/api/v2/pokemon/8")
+                                  .then((r) => r.json())
+                                  .then((p8) => {
+                                    pokemon_list.push(p8);
+                                    console.log("8: ", p8.name);
+                                    fetch("https://pokeapi.co/api/v2/pokemon/9")
+                                      .then((r) => r.json())
+                                      .then((p9) => {
+                                        pokemon_list.push(p9);
+                                        console.log("9: ", p9.name);
+                                        fetch(
+                                          "https://pokeapi.co/api/v2/pokemon/10"
+                                        )
+                                          .then((r) => r.json())
+                                          .then((p10) => {
+                                            pokemon_list.push(p10);
+                                            console.log("10: ", p10.name);
+                                            fetch(
+                                              "https://pokeapi.co/api/v2/pokemon/11"
+                                            )
+                                              .then((r) => r.json())
+                                              .then((p11) => {
+                                                pokemon_list.push(p11);
+                                                console.log("11: ", p11.name);
+                                                fetch(
+                                                  "https://pokeapi.co/api/v2/pokemon/12"
+                                                )
+                                                  .then((r) => r.json())
+                                                  .then((p12) => {
+                                                    pokemon_list.push(p12);
+                                                    console.log(
+                                                      "12: ",
+                                                      p12.name
+                                                    );
+                                                    SetListPoke(pokemon_list);
+                                                  });
+                                              });
+                                          });
+                                      });
+                                  });
+                              });
+                          });
+                      });
+                  });
+              });
+          });
+      });
+  },
+  []
+);
+```
+
+Dentro del useEffect no podemos crear varias funciones pero si la podemos llamar:
+
+```js
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+
+import Pokemon from "./components/pokemon";
+
+function App() {
+  const [visibility_poke, SetVisibility] = useState(false);
+  // Actividad 2.1
+  const [list_poke, SetListPoke] = useState([]);
+  // Funcion para act 1
+  function callback_hell() {
+    let pokemon_list = [];
+    const start = Date.now();
+    SetVisibility(true);
+    fetch("https://pokeapi.co/api/v2/pokemon/1")
+      .then((r) => r.json())
+      .then((p1) => {
+        pokemon_list.push(p1);
+        console.log("1: ", p1.name);
+        fetch("https://pokeapi.co/api/v2/pokemon/2")
+          .then((r) => r.json())
+          .then((p2) => {
+            pokemon_list.push(p2);
+            console.log("2: ", p2.name);
+            fetch("https://pokeapi.co/api/v2/pokemon/3")
+              .then((r) => r.json())
+              .then((p3) => {
+                pokemon_list.push(p3);
+                console.log("3: ", p3.name);
+                fetch("https://pokeapi.co/api/v2/pokemon/4")
+                  .then((r) => r.json())
+                  .then((p4) => {
+                    pokemon_list.push(p4);
+                    console.log("4: ", p4.name);
+                    fetch("https://pokeapi.co/api/v2/pokemon/5")
+                      .then((r) => r.json())
+                      .then((p5) => {
+                        pokemon_list.push(p5);
+                        console.log("5: ", p5.name);
+                        fetch("https://pokeapi.co/api/v2/pokemon/6")
+                          .then((r) => r.json())
+                          .then((p6) => {
+                            pokemon_list.push(p6);
+                            console.log("6: ", p6.name);
+                            fetch("https://pokeapi.co/api/v2/pokemon/7")
+                              .then((r) => r.json())
+                              .then((p7) => {
+                                pokemon_list.push(p7);
+                                console.log("7: ", p7.name);
+                                fetch("https://pokeapi.co/api/v2/pokemon/8")
+                                  .then((r) => r.json())
+                                  .then((p8) => {
+                                    pokemon_list.push(p8);
+                                    console.log("8: ", p8.name);
+                                    fetch("https://pokeapi.co/api/v2/pokemon/9")
+                                      .then((r) => r.json())
+                                      .then((p9) => {
+                                        pokemon_list.push(p9);
+                                        console.log("9: ", p9.name);
+                                        fetch(
+                                          "https://pokeapi.co/api/v2/pokemon/10"
+                                        )
+                                          .then((r) => r.json())
+                                          .then((p10) => {
+                                            pokemon_list.push(p10);
+                                            console.log("10: ", p10.name);
+                                            fetch(
+                                              "https://pokeapi.co/api/v2/pokemon/11"
+                                            )
+                                              .then((r) => r.json())
+                                              .then((p11) => {
+                                                pokemon_list.push(p11);
+                                                console.log("11: ", p11.name);
+                                                fetch(
+                                                  "https://pokeapi.co/api/v2/pokemon/12"
+                                                )
+                                                  .then((r) => r.json())
+                                                  .then((p12) => {
+                                                    pokemon_list.push(p12);
+                                                    console.log(
+                                                      "12: ",
+                                                      p12.name
+                                                    );
+                                                    SetListPoke(pokemon_list);
+                                                  });
+                                              });
+                                          });
+                                      });
+                                  });
+                              });
+                          });
+                      });
+                  });
+              });
+          });
+      });
+  }
+  useEffect(callback_hell, []);
+
+  return (
+    <>
+      <div>
+        <div onClick={callback_hell}>
+          <p>Exercici 2.1</p>
+          <p>Tiempo: </p>
+        </div>
+        <div>
+          <p>Exercici 2.2</p>
+          <p>Tiempo: </p>
+        </div>
+        <div>
+          <p>Exercici 2.3</p>
+          <p>Tiempo: </p>
+        </div>
+      </div>
+
+      <div className="card">
+        {visibility_poke && <Pokemon list_pokemon={list_poke}></Pokemon>}
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  );
+}
+
+export default App;
+```
