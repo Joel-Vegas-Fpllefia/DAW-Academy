@@ -1,0 +1,74 @@
+body {
+  background: #223;
+}
+.box {
+  width: 300px;
+  height: 300px;
+  border: 4px solid black;
+  background: indigo;
+  transition: background 1s linear;
+
+  animation-name: cambiar-color;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* espera 2segundos desde que se carga la web */
+  animation-delay: 2s;
+  /* Como termina la animacion */
+  /* forwards=> que se quede en el ultimo estado  */
+  animation-fill-mode: backwards;
+
+  animation-direction: alternate;
+
+  animation-play-state: running;
+  /* animation: ambiar-color 5s linear; */
+}
+.box:hover {
+  animation-play-state: paused;
+}
+@keyframes cambiar-color {
+  /* Si ya tiene un fondo y es el mismo que el del from es innecesario */
+  /* from {
+    background: indigo;
+  }
+  to {
+    background: red;
+  } */
+  0% {
+    background: indigo;
+  }
+  25% {
+    background: green;
+    width: 500px;
+  }
+  75% {
+    background: blue;
+    width: 200px;
+  }
+  100% {
+    background: red;
+    width: 300px;
+  }
+}
+
+/* Activador de cuando se posa encima del contenedor */
+/* .box:hover {
+  background: red;
+} */
+
+/* Manteniendo el boton sobre el contenedor */
+/* .box:active {
+  background: red;
+} */
+
+
+.bernard {
+  width: 112px;
+  height: 156px;
+  background-image: url("bernard-bernoulli.png");
+  animation: walk 0.75s steps(6) infinite;
+}
+
+@keyframes walk {
+  to { background-position: -672px; }
+}
