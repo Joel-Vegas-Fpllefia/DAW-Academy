@@ -124,7 +124,7 @@ Codigo error:
 
 ```js
 students_state = students_state.filter(
-  (student) => student.ciclo === fp_estado
+  (student) => student.ciclo === fp_estado,
 );
 ```
 
@@ -137,7 +137,7 @@ Codigo error:
 ```js
 if (fp_estado != "") {
   const filter_fp = students_state.filter(
-    (student) => student.ciclo === fp_estado
+    (student) => student.ciclo === fp_estado,
   );
   setStudentsState(filter_fp);
 }
@@ -358,28 +358,28 @@ useEffect(
                                         pokemon_list.push(p9);
                                         console.log("9: ", p9.name);
                                         fetch(
-                                          "https://pokeapi.co/api/v2/pokemon/10"
+                                          "https://pokeapi.co/api/v2/pokemon/10",
                                         )
                                           .then((r) => r.json())
                                           .then((p10) => {
                                             pokemon_list.push(p10);
                                             console.log("10: ", p10.name);
                                             fetch(
-                                              "https://pokeapi.co/api/v2/pokemon/11"
+                                              "https://pokeapi.co/api/v2/pokemon/11",
                                             )
                                               .then((r) => r.json())
                                               .then((p11) => {
                                                 pokemon_list.push(p11);
                                                 console.log("11: ", p11.name);
                                                 fetch(
-                                                  "https://pokeapi.co/api/v2/pokemon/12"
+                                                  "https://pokeapi.co/api/v2/pokemon/12",
                                                 )
                                                   .then((r) => r.json())
                                                   .then((p12) => {
                                                     pokemon_list.push(p12);
                                                     console.log(
                                                       "12: ",
-                                                      p12.name
+                                                      p12.name,
                                                     );
                                                     SetListPoke(pokemon_list);
                                                   });
@@ -395,7 +395,7 @@ useEffect(
           });
       });
   },
-  []
+  [],
 );
 ```
 
@@ -464,28 +464,28 @@ function App() {
                                         pokemon_list.push(p9);
                                         console.log("9: ", p9.name);
                                         fetch(
-                                          "https://pokeapi.co/api/v2/pokemon/10"
+                                          "https://pokeapi.co/api/v2/pokemon/10",
                                         )
                                           .then((r) => r.json())
                                           .then((p10) => {
                                             pokemon_list.push(p10);
                                             console.log("10: ", p10.name);
                                             fetch(
-                                              "https://pokeapi.co/api/v2/pokemon/11"
+                                              "https://pokeapi.co/api/v2/pokemon/11",
                                             )
                                               .then((r) => r.json())
                                               .then((p11) => {
                                                 pokemon_list.push(p11);
                                                 console.log("11: ", p11.name);
                                                 fetch(
-                                                  "https://pokeapi.co/api/v2/pokemon/12"
+                                                  "https://pokeapi.co/api/v2/pokemon/12",
                                                 )
                                                   .then((r) => r.json())
                                                   .then((p12) => {
                                                     pokemon_list.push(p12);
                                                     console.log(
                                                       "12: ",
-                                                      p12.name
+                                                      p12.name,
                                                     );
                                                     SetListPoke(pokemon_list);
                                                   });
@@ -532,3 +532,7 @@ function App() {
 
 export default App;
 ```
+
+# const pokemons = await Promise.all(promises)
+
+pokemons ya es una lista

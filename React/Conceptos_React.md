@@ -260,7 +260,7 @@ const promesa = new Promise((resolve, reject) => {
   setTimeout(
     // Si el numero es mayor a 0.5 devolvera Listo sino Fallo
     () => (Math.random() > 0.5 ? resolve("¡Listo!") : reject("Falló")),
-    500
+    500,
   );
 });
 
@@ -279,8 +279,8 @@ un .then dentro de otro .then
 ```js
 fetch("https://pokeapi.co/api/v2/pokemon/1").then(
   fetch("https://pokeapi.co/api/v2/pokemon/2").then(
-    fetch("https://pokeapi.co/api/v2/pokemon/3")
-  )
+    fetch("https://pokeapi.co/api/v2/pokemon/3"),
+  ),
 );
 ```
 
@@ -296,7 +296,7 @@ async function loadParallel() {
     for (let i = 1; i <= 12; i++) {
       // No lo rellena con datos si no con promesas
       promises.push(
-        fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then((r) => r.json())
+        fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then((r) => r.json()),
       );
     }
     // Cuando tenga todas las promesas resultas (mientras se van guardando los datos en pokemon) que espere
@@ -326,12 +326,12 @@ async function loadSequential() {
   const start = Date.now();
   try {
     const p1 = await fetch("https://pokeapi.co/api/v2/pokemon/1").then((r) =>
-      r.json()
+      r.json(),
     );
     console.log(p1.name);
     // ... hasta p12
     const p12 = await fetch("https://pokeapi.co/api/v2/pokemon/12").then((r) =>
-      r.json()
+      r.json(),
     );
     console.log(p12.name);
   } catch (err) {
@@ -353,3 +353,26 @@ Se usa para cuando tengo la informacion en 5 servidores diferente lo ejecuto y s
 
 Vacio cada vez que se rederiza
 Cuando hay uno Una vez que se modifica
+
+# Calcular el tiempo en segundos
+
+1. empezar a contar el tiempo:
+
+```js
+const start = Date.now();
+```
+
+2. Restar y calcular segundos
+
+```js
+(Date.now() - start) / 1000;
+```
+
+# Vaciar una lista
+
+Para vaciar una lista tenemos que indicar lo siguiente:
+Pero no hace por que ...
+
+```js
+lista = [];
+```
